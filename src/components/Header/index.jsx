@@ -4,6 +4,27 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import * as actionType from "constants/actionTypes";
 import { Button } from "uikit";
+import styled from "styled-components";
+import Logo from "images/logo.png";
+
+const HeaderStyled = styled.div`
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`;
+
+const HeaderTopStyled = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+const HeaderAuthStyled = styled.div`
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  align-items: center;
+`
 const Header = ({
 	isMainPage,
 }) => {
@@ -15,33 +36,39 @@ const Header = ({
 		navigate('/auth');
 	};
 
-  // useEffect(() => {
-  //   setUser(JSON.parse(localStorage.getItem('profile')));
-  // }, []);
-
-
 	const handleAuthClick = useCallback(() => {
-    navigate("/auth")
+    navigate("/auth");
 	}, [navigate]);
 
 	const handleRegClick = useCallback(() => {
-    navigate("/registration")
+    navigate("/registration");
 	}, [navigate]);
 
+  const handleProfileClick = useCallback(() => {
+    navigate("/profile");
+  }, [navigate]);
+
 	return (
-	<div className="main-header">
-		<div className="main-header-top">
-			<div className="main-header-logo">Logo</div>
-			<div className="main-header-auth">
+	<HeaderStyled>
+		<HeaderTopStyled>
+			<img src={Logo} alt="" width="50px" />
+			<HeaderAuthStyled>
 				{
 					authData
 						?
 							(
-								<Button
-									onClick={logout}
-								>
-									Выход
-								</Button>
+									<>
+                    <Button
+                      onClick={handleProfileClick}
+                    >
+                      {authData.name}
+                    </Button>
+                    <Button
+                      onClick={logout}
+                    >
+                      Выход
+                    </Button>
+                  </>
 							)
 						:
 							(
@@ -59,10 +86,10 @@ const Header = ({
 								</>
 							)
 				}
-			</div>
-		</div>
+			</HeaderAuthStyled>
+		</HeaderTopStyled>
 		{isMainPage ?? <Navigation /> }
-	</div>
+	</HeaderStyled>
 	)
 }
 

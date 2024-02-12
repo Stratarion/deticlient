@@ -5,6 +5,8 @@ import { Button } from "./buttons";
 import { Input, InputWithLabel } from "./Input";
 import { Select } from "./Select";
 import { List, ListItem } from "./List";
+import { FlexBox, FlexItem } from "./FlexBox";
+import { Image } from "./Image";
 
 export {
     Grid,
@@ -13,7 +15,10 @@ export {
     Button,
     Input,
     InputWithLabel,
+    Image,
     Select,
     List,
-    ListItem
+    ListItem,
+    FlexBox,
+    FlexItem,
 }

@@ -57,7 +57,7 @@ export default function AddGartenPage () {
       const data = new FormData();
       data.append("avatar", image);
       dispatch(uploadImage(data)).then((res) => {
-        setAvatar(res.data.path);
+        setAvatar(res?.data?.path);
       });
     } catch (error) {
       
@@ -99,15 +99,6 @@ export default function AddGartenPage () {
 
         <input className="registration-form-submit" type="submit" value="Submit" />
       </form>
-      <div>
-        {
-          avatar
-            ? <img src={`${avatar}`} alt="avatar" />
-            : <img src={`${logo}`} alt="avatar" />
-        }
-        <input type="file" onChange={(e) => setImage(e.target.files[0])} />
-        <button onClick={sendFile}>ИЗменить аватар</button>
-      </div>
     </div>
   )
 }

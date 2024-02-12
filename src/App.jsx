@@ -10,6 +10,7 @@ import AuthPage from "pages/Auth";
 import RegistrationPage from "pages/Registration";
 import AddGartenPage from "pages/AddKinderGarten";
 import UsersList from "pages/UsersList";
+import UserProfilePage from "pages/UserProfile";
 import { useDispatch } from "react-redux";
 import { AUTH } from "constants/actionTypes";
 
@@ -45,6 +46,10 @@ const router = createBrowserRouter([
   {
     path: "userslist",
     Component: UsersList,
+  },
+  {
+    path: "profile",
+    Component: UserProfilePage,
   }
 ])
 

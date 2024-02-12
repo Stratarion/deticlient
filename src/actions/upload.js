@@ -5,6 +5,7 @@ export const uploadImage = (file) => async (dispatch) => {
   try {
     dispatch({ type: START_LOADING });
     const response = await api.uploadImage(file);
+    dispatch({ type: UPLOAD, payload: response.data })
     dispatch({ type: END_LOADING });
     return response.data;
   } catch (error) {
