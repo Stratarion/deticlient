@@ -23,7 +23,7 @@ input[type='checkbox'] {
 .container {
   padding: 0 30px;
   width: 1200px;
-  height: 100vh;
+  min-height: 100vh;
   margin: 0 auto;
   -webkit-box-shadow: 0px 0px 22px 0px rgba(34, 60, 80, 0.14);
   -moz-box-shadow: 0px 0px 22px 0px rgba(34, 60, 80, 0.14);

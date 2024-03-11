@@ -6,7 +6,7 @@ export const GartenInfo = ({garten}) => {
   return (
     <>
       <div className="kindergarten-item-title">{garten.name}</div>
-      <div className="kindergarten-item-max">{garten.maxConut}</div>
+      <div className="kindergarten-item-max">{garten.maxCount}</div>
       <div className="kindergarten-item-cost">{garten.costInfo}</div>
       <div className="kindergarten-item-stars">
         <Stars value={garten.rate} edit={false} />

@@ -9,7 +9,7 @@ import logo from "logo.svg";
 
 export default function AddGartenPage () {
   const [name, setName] = useState("");
-  const [maxConut, setMaxCount] = useState("");
+  const [maxCount, setMaxCount] = useState("");
   const [description, setDescription] = useState("");
   const [type, setType] = useState("");
   const [costInfo, setCostInfo] = useState("");
@@ -39,7 +39,7 @@ export default function AddGartenPage () {
     const geoArray = geo.trim().split(",");
     const reqBody = {
         name,
-        maxConut,
+        maxCount,
         description,
         type,
         costInfo,
@@ -74,7 +74,7 @@ export default function AddGartenPage () {
         </label>
         <label>
           Максимальная численносить группы:
-          <Input type="text" value={maxConut} onChange={(e) =>setMaxCount(e.target.value)} />
+          <Input type="text" value={maxCount} onChange={(e) =>setMaxCount(e.target.value)} />
         </label>
         <label>
           Описание:

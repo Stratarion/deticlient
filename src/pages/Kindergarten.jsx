@@ -171,28 +171,7 @@ function Kindergarten() {
             <GartenInfo garten={getCurrentPlaceInfo()} />
           </>
         ) : (
-          <List>
-            {gartensList.map((garten) => {
-              return (
-                <li key={garten.id} className="kindergarten-item">
-                  <div className="kindergarten-item-title" onClick={() => handleMarkClick(garten)}>{garten.name}</div>
-                  <div className="kindergarten-item-max">{garten.maxConut}</div>
-                  {garten.costInfo && <div className="kindergarten-item-cost">Цена: {garten.costInfo}</div>}
-                  <div className="kindergarten-item-stars">
-                    <Stars value={garten.rate} edit={false} />
-                  </div>
-                  <div className="kindergarten-item-desription">
-                    {garten.description}
-                  </div>
-                  <div className="kindergarten-item-marks"></div>
-                </li>
-              )
-            })}
-            {isLoading && "Загрузка..."}
-            {gartensList?.lenght}
-            Номер страницы {page}
-            <button onClick={() => setPage(page+1)} >еще</button>
-          </List>
+          <List data={gartensList} page={page} mtop="20px" handleTitleClick={handleMarkClick} />
         )}
         
         
