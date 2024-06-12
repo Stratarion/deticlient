@@ -1,16 +1,15 @@
 import React from 'react';
 import { CategoryButton } from 'uikit';
-import Header from 'components/Header';
+import { MainLayout } from "layouts";
 
 function Home() {
   return (
-    <div>
-        <Header isMainPage={true} />
+    <MainLayout isMainPage={true}>
         <div className="category-list">
           <CategoryButton title='Детские сады' link="/kindergarten"  />
           <CategoryButton title='Секции' link="/sections"  />
         </div>
-    </div>
+    </MainLayout>
 
   )
 }

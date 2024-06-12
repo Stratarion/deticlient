@@ -1,12 +1,13 @@
 import React from "react";
 import { useParams } from "react-router-dom";
+import { MainLayout } from "layouts";
 
 function GartenByI({id}) {
 	const params = useParams();
 	return (
-		<div>
+		<MainLayout>
 			GartenById {params.id}
-		</div>
+		</MainLayout>
 	)
 }
 

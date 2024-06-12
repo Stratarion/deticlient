@@ -1,6 +1,7 @@
 import styled from "styled-components";
+import { Select } from "antd";
 
-export const SelectStyled = styled.div`
+export const SelectStyled = styled(Select)`
   position: relative;
   display: block;
   min-width: 100px;

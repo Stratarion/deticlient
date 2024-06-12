@@ -1,17 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import { WrapStyled } from "../Select/Select.styled";
+import { Input as AntInput } from "antd";
 
-const InputStyled = styled.input`
+const InputStyled = styled(AntInput)`
   width: 300px;
-  font-size: 14px;
-  padding: 5px 10px;
-  border: none;
-  border-radius: 10px;
-  display: block;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
-  line-height: 18px;
-  color: rgba(66, 67, 72, 0.8);
+
   cursor: pointer;
 `
 

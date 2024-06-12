@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 
-import Header from 'components/Header';
 
 import { useDispatch } from 'react-redux';
 import { getUsersList } from 'actions/auth';
+import { MainLayout } from "layouts";
 
 function UsersList() {
 
@@ -14,10 +14,9 @@ function UsersList() {
   }, [dispatch]);
 
   return (
-    <div>
-      <Header />
+    <MainLayout>
       Список пользователей
-    </div>
+    </MainLayout>
   )
 };
 

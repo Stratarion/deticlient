@@ -29,8 +29,7 @@ const ShortInfo = (info) => {
   )
 } 
 
-export const List = ({ page, data, handleTitleClick }) => {
-  // return <ListStyled $mtop={mtop}>{children}</ListStyled>;
+export const List = ({ data, handleTitleClick }) => {
   return (
     <ListStyled
       itemLayout="vertical"
@@ -39,7 +38,7 @@ export const List = ({ page, data, handleTitleClick }) => {
         onChange: (page) => {
           console.log(page);
         },
-        pageSize: 3,
+        pageSize: 10,
       }}
       dataSource={data}
       footer={
@@ -65,7 +64,7 @@ export const List = ({ page, data, handleTitleClick }) => {
         >
           <ListStyled.Item.Meta
             // avatar={<Avatar src={item.avatar} />}
-            title={<a onClick={() => handleTitleClick(item)} >{item.name}</a>}
+            title={<div onClick={() => handleTitleClick(item)} >{item.name}</div>}
             description={ShortInfo(item)}
           />
           {item.description}

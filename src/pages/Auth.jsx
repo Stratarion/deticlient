@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux';
 import { signin } from "actions/auth";
 import { InputWithLabel } from "uikit";
 import { Button } from "uikit";
+import { MainLayout } from "layouts";
 
 
 export default function AuthPage () {
@@ -29,8 +30,7 @@ export default function AuthPage () {
   }
 
   return (
-    <div className="auth">
-      <Header />
+    <MainLayout className="auth">
       <div>Авторизация</div>
       <form className="auth-form" onSubmit={handleSubmit}>
         <InputWithLabel
@@ -49,6 +49,6 @@ export default function AuthPage () {
           type="submit"
         >Подтвердить</Button>
       </form>
-    </div>
+    </MainLayout>
   )
 }

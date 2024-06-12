@@ -1,12 +1,12 @@
 import React, { useState, useCallback } from "react";
 import { useDispatch } from 'react-redux';
-import { createGarten } from 'actions/gartens';
+import { createSection } from 'actions/sections';
 import { Input } from "uikit";
 import { uploadImage } from "actions/upload";
 import { MainLayout } from "layouts";
 
 
-export default function AddGartenPage () {
+export default function AddSectionPage () {
   const [name, setName] = useState("");
   const [maxCount, setMaxCount] = useState("");
   const [description, setDescription] = useState("");
@@ -46,7 +46,7 @@ export default function AddGartenPage () {
         geo: geoArray,
     }
 
-    dispatch(createGarten(reqBody));
+    dispatch(createSection(reqBody));
     clearForm();
     e.preventDefault();
   }
@@ -64,7 +64,7 @@ export default function AddGartenPage () {
   }, [image, dispatch])
   return (
     <MainLayout className="registration">
-      <div>Добавление детского садика</div>
+      <div>Добавление секции</div>
       <form className="registration-form" onSubmit={(e) => handleSubmit(e)}>
         <label>
           Название:
@@ -79,7 +79,7 @@ export default function AddGartenPage () {
           <Input type="text" value={description} onChange={(e) =>setDescription(e.target.value)} />
         </label>
         <label>
-          Тип садика:
+          Тип секции:
           <Input type="text" value={type} onChange={(e) =>setType(e.target.value)} />
         </label>
         <label>

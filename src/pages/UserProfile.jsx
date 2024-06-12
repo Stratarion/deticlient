@@ -1,6 +1,5 @@
 import React, { useCallback, useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import Header from 'components/Header';
 import { Grid } from "uikit";
 import { GridItem } from "uikit";
 import styled from "styled-components";
@@ -8,6 +7,9 @@ import { fileReaderHealper } from "utils/fileReader";
 import { FlexBox, Image } from "uikit";
 import settings from "images/settings.svg";
 import { Input } from "uikit";
+import { MainLayout } from "layouts";
+import { OrganisationProfile } from "components/OrganisationProfile";
+import { MyOrgList } from "components/OrganisationProfile/MyOrgList";
 
 
 const ProfileStyled = styled.div`
@@ -25,15 +27,15 @@ const UserProfilePage = () => {
 
   useEffect(() => {
     if (authData) {
+      console.log(authData, email);
       setName(authData.name);
       setEmail(authData.email);
     }
-  })
+  }, [authData, email])
 
 
   return (
-    <div>
-      <Header />
+    <MainLayout>
       <ProfileStyled>
         {authData ? <Grid rows="repeat(6, 1fr)">
           <GridItem columns="1/3" rows="1/7">
@@ -62,7 +64,16 @@ const UserProfilePage = () => {
               <Image onClick={handleClickSettings} src={settings} width="20px" height="auto" />
             </FlexBox>
           </GridItem>
-          <GridItem></GridItem>
+          { authData.isOrganisation &&
+            <GridItem columns="1/13">
+              <OrganisationProfile />
+            </GridItem>
+          }
+          { authData.isOrganisation &&
+            <GridItem columns="1/13">
+              <MyOrgList />
+            </GridItem>
+          }
           <GridItem></GridItem>
           <GridItem></GridItem>
           <GridItem></GridItem>
@@ -77,7 +88,7 @@ const UserProfilePage = () => {
         </Grid> : <div>Загрузка</div>}
 
       </ProfileStyled>
-    </div>
+    </MainLayout>
   );
 };
 
