@@ -6,14 +6,12 @@ import { Link } from'react-router-dom';
 
 export const MyOrgList = () => {
   const [page, setPage] = useState(1);
-  const { isLoading, organisations, auth } = useSelector((state) => state.organisations);
+  const { organisations, auth } = useSelector((state) => state.organisations);
   const dispatch = useDispatch();
   useEffect(() => {
-    if (!isLoading) {
-      return;
-    }
+
     dispatch(getOrganisationsList(page, auth?.authData?.id))
-  }, [page, dispatch, isLoading, auth?.authData?.id]);
+  }, [page, dispatch, auth?.authData?.id]);
 
   return (
     <div>
@@ -24,7 +22,7 @@ export const MyOrgList = () => {
           <List.Item>
             <List.Item.Meta
               avatar={<Avatar src={`https://api.dicebear.com/7.x/miniavs/svg?seed=${index}`} />}
-              title={<Link to={`/profile/organisation/${item.id}`}>{item.name}</Link>}
+              title={<Link to={`/profile/organisation/${item.id}/lessons`}>{item.name}</Link>}
               description={item.description}
             />
           </List.Item>

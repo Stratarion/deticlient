@@ -1,21 +1,21 @@
 import * as api from 'api/index.js';
-import { START_LOADING, END_LOADING, FETCH_ALL_WORKERS } from 'constants/actionTypes';
+import { START_LOADING, END_LOADING, FETCH_ALL_LESSONS } from 'constants/actionTypes';
 
-export const addWorker = (body) => async (dispatch) => {
+export const addLesson = (body) => async (dispatch) => {
   try {
     dispatch({ type: START_LOADING });
-    await api.addWorker(body);
+    await api.addLesson(body);
     dispatch({ type: END_LOADING });
 
   } catch (error) {
     console.log(error);
   }
 }
-export const getWorkersByOrgId = (org_id) => async (dispatch) => {
+export const getLessonsByOrgId = (org_id) => async (dispatch) => {
   try {
     dispatch({ type: START_LOADING });
-    const { data } = await api.getWorkersByOrgId(org_id);
-    dispatch({ type: FETCH_ALL_WORKERS, payload: { data } });
+    const { data } = await api.getLessonsByOrgId(org_id);
+    dispatch({ type: FETCH_ALL_LESSONS, payload: { data } });
     dispatch({ type: END_LOADING });
   } catch (error) {
     console.log(error);

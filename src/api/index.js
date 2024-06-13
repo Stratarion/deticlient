@@ -28,6 +28,9 @@ export const getOrganisationById = (id) => API.get(`/organisations/getOrganisati
 export const addWorker = (newWorker) => API.post('/worker/create', newWorker);
 export const getWorkersByOrgId = (org_id) => API.get(`/worker/getWorkersByOrgId?org_id=${org_id}`);
 
+export const addLesson = (newLesson) => API.post('/lesson/create', newLesson);
+export const getLessonsByOrgId = (org_id) => API.get(`/lesson/getLessonsByOrgId?org_id=${org_id}`);
+
 export const signIn = (formData) => API.post('/user/signin', formData);
 export const signUp = (formData) => API.post('/user/signup', formData);
 export const getUsersList = (page) => API.get(`/user/getUserList?page=${page}`);

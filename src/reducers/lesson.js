@@ -1,15 +1,15 @@
-import { FETCH_ALL_WORKERS, END_LOADING, START_LOADING } from "constants/actionTypes";
+import { FETCH_ALL_LESSONS, END_LOADING, START_LOADING } from "constants/actionTypes";
 
-const workersReducer = (state = { isLoading: true, workers: [ ]}, action) => {
+const workersReducer = (state = { isLoading: true, lessons: [ ]}, action) => {
   switch (action.type) {
     case START_LOADING:
       return { ...state, isLoading: true };
     case END_LOADING:
       return { ...state, isLoading: false };
-    case FETCH_ALL_WORKERS:
+    case FETCH_ALL_LESSONS:
       return {
         ...state,
-        workers: action.payload.data,
+        lessons: action.payload.data,
       };
     default:
       return state;

@@ -2,8 +2,7 @@ import React, { useCallback, useEffect } from "react";
 import { Flex, Button, Modal, Form, Input, Table } from "antd";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { addWorker } from "actions/worker";
-import { getWorkersByOrgId } from "actions/worker";
+import { addWorker, getWorkersByOrgId } from "actions/worker";
 
 const columnsWorkers = [
   {
@@ -20,17 +19,14 @@ const columnsWorkers = [
 
 export const WorkersListPage = () => {
   const params = useParams();
-  const { isLoading, workers } = useSelector((state) => state.workers);
+  const { workers } = useSelector((state) => state.workers);
   const dispatch = useDispatch();
   const [form] = Form.useForm();
   const [isModalAddWorkerOpen, setIsModalAddWorkerOpen] = React.useState(false);
   
   useEffect(() => {
-    if (!isLoading) {
-      return;
-    }
     dispatch(getWorkersByOrgId(params.id));
-  }, [isLoading, dispatch, params.id]);
+  }, [dispatch, params.id]);
   
   const heandleClickCreateWorker = useCallback(() => {
     setIsModalAddWorkerOpen(true);
