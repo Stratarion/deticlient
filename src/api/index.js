@@ -31,6 +31,11 @@ export const getWorkersByOrgId = (org_id) => API.get(`/worker/getWorkersByOrgId?
 export const addLesson = (newLesson) => API.post('/lesson/create', newLesson);
 export const getLessonsByOrgId = (org_id) => API.get(`/lesson/getLessonsByOrgId?org_id=${org_id}`);
 
+export const getInfoSheduller = (org_id) => API.get(`/info/sheduller?org_id=${org_id}`); 
+
+export const createEvent = (body) => API.post('/shedulle/createEvent', body);
+export const getEventsByOrgId = (org_id) => API.get(`/shedulle/getShedullesByOrgId?org_id=${org_id}`);
+
 export const signIn = (formData) => API.post('/user/signin', formData);
 export const signUp = (formData) => API.post('/user/signup', formData);
 export const getUsersList = (page) => API.get(`/user/getUserList?page=${page}`);

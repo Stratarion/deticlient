@@ -24,7 +24,7 @@ const OrganisationProfilePage = () => {
         <Layout>
           <Header style={{ backgroundColor: "transparent"}} ><Title >{currentOrganisation?.name}</Title></Header>
           <Layout>
-            <Sider width="25%">
+            <Sider width="15%">
               <Menu
                 theme="light"
                 style={{ height: "100%" }}

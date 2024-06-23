@@ -20,6 +20,10 @@ import { ShedulleListPage } from "pages/ShedulleList";
 import { LessonsListPage } from "pages/LessonsList";
 import { WorkersListPage } from "pages/WorkersList";
 
+import moment from 'moment';
+// Set moment to FR
+moment().locale('ru');
+
 const router = createBrowserRouter([
   {
     path: "/",

@@ -6,5 +6,6 @@ import sections from './sections';
 import organisations from './organisations';
 import workers from './worker';
 import lessons from './lesson';
+import events from './events';
 
-export const reducers = combineReducers({ gartens, auth, sections, organisations, workers, lessons });
+export const reducers = combineReducers({ gartens, auth, sections, organisations, workers, lessons, events });
