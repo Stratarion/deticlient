@@ -91,10 +91,6 @@ export const Calendar = () => {
       const dateEnd = dayjs(item.date_end, dateFormat).format(dateFormat);
       const isCorrectDate = dateStart <= day?.fullDay.format(dateFormat) && dateEnd >= day?.fullDay.format(dateFormat)
       const isTimeCorrect = isTimeEqual ? timeStart === time : (timeStart <= time) && (timeEnd > time);
-      if (isCorrectDate) {
-        console.log(isCorrectDate, isTimeCorrect);
-        console.log(dateEnd, dateStart, day?.fullDay.format(dateFormat), timeStart, time)
-      }
       return (isCorrectDate && isTimeCorrect)
     })
   }, [events]);

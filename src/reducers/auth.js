@@ -1,7 +1,6 @@
 import * as actionType from 'constants/actionTypes';
 
 const authReducer = (state = { authData: null }, action) => {
-  console.log(state, action)
   switch (action.type) {
     case actionType.AUTH:
       localStorage.setItem('token', JSON.stringify({ token: action?.data.token }));

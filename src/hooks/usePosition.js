@@ -19,7 +19,6 @@ export function usePosition(initial) {
     geo.getCurrentPosition(
         (coords) => {
           const { latitude, longitude } = coords.coords;
-          console.log("ПОЗИЦИЯ ПОЛЬЗОВАТЕЛЯ ", [latitude, longitude])
           setPosition([latitude, longitude] );
         },
         (err) => {

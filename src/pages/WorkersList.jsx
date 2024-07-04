@@ -3,6 +3,7 @@ import { Flex, Button, Modal, Form, Input, Table } from "antd";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addWorker, getWorkersByOrgId } from "actions/worker";
+import { getTableDataWithKey } from "utils/index";
 
 const columnsWorkers = [
   {
@@ -74,7 +75,7 @@ export const WorkersListPage = () => {
           </Form.Item>
         </Form>
       </Modal>
-      <Table columns={columnsWorkers} dataSource={workers} />
+      <Table columns={columnsWorkers} dataSource={getTableDataWithKey({ data: workers, keyName: "id" })} rowKey={"id"} />
     </Flex>
   );
 };

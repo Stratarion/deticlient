@@ -113,7 +113,7 @@ function Sections() {
 
   const coordForMap = useMemo(() => {
     return getCurrentPlaceInfo()
-    ? [getCurrentPlaceInfo()?.geo1, getCurrentPlaceInfo()?.geo2]
+    ? getCurrentPlaceInfo()?.geo
     : userPosition
 
   }, [getCurrentPlaceInfo, userPosition])
@@ -156,7 +156,7 @@ function Sections() {
             currentPosition={coordForMap}
             markList={sectonsList}
             handleMarkClick={handleMarkClick}
-            ref={ref}
+            mapRef={ref}
             mapSize={mapSize}
           />
 
@@ -171,6 +171,7 @@ function Sections() {
             <List
               data={sectonsList}
               page={page}
+              setPage={setPage}
               mtop="20px"
               handleTitleClick={handleMarkClick}
             />

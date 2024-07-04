@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addLesson } from "actions/lesson";
 import { getLessonsByOrgId } from "actions/lesson";
+import { getTableDataWithKey } from "utils";
 
 const columnsLessons = [
   {
@@ -76,7 +77,7 @@ export const LessonsListPage = () => {
           </Form.Item>
         </Form>
       </Modal>
-      <Table columns={columnsLessons} dataSource={lessons} />
+      <Table columns={columnsLessons} dataSource={getTableDataWithKey({ data: lessons, keyName: "id"})} rowKey={"id"} />
     </Flex>
   );
 };

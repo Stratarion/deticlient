@@ -1,8 +1,8 @@
-import React, { useState, useCallback } from "react";
+import React, { useState } from "react";
 import { useDispatch } from 'react-redux';
 import { createSection } from 'actions/sections';
 import { Input } from "uikit";
-import { uploadImage } from "actions/upload";
+// import { uploadImage } from "actions/upload";
 import { MainLayout } from "layouts";
 
 
@@ -14,12 +14,8 @@ export default function AddSectionPage () {
   const [costInfo, setCostInfo] = useState("");
   const [owner, setOwner] = useState("");
   const [geo, setGeo] = useState('0, 0');
-  // const [address, setAddress] = useState('');
-  // const [telefon, setTelefon] = useState('');
-  // const [email, setEmail] = useState('');
-  // const [web, setWeb] = useState('');
-  const [image, setImage] = useState(null);
-  const [avatar, setAvatar] = useState(null);
+  // const [image, setImage] = useState(null);
+  // const [avatar, setAvatar] = useState(null);
   const dispatch = useDispatch();
 
   const clearForm = () => {
@@ -51,17 +47,17 @@ export default function AddSectionPage () {
     e.preventDefault();
   }
 
-  const sendFile = useCallback(async () => {
-    try {
-      const data = new FormData();
-      data.append("avatar", image);
-      dispatch(uploadImage(data)).then((res) => {
-        setAvatar(res?.data?.path);
-      });
-    } catch (error) {
+  // const sendFile = useCallback(async () => {
+  //   try {
+  //     const data = new FormData();
+  //     data.append("avatar", image);
+  //     dispatch(uploadImage(data)).then((res) => {
+  //       setAvatar(res?.data?.path);
+  //     });
+  //   } catch (error) {
       
-    }
-  }, [image, dispatch])
+  //   }
+  // }, [image, dispatch])
   return (
     <MainLayout className="registration">
       <div>Добавление секции</div>

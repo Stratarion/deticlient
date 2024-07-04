@@ -1,8 +1,7 @@
-import React, { useState, useCallback } from "react";
+import React, { useState } from "react";
 import { useDispatch } from 'react-redux';
 import { createGarten } from 'actions/gartens';
 import { Input } from "uikit";
-import { uploadImage } from "actions/upload";
 import { MainLayout } from "layouts";
 
 
@@ -18,8 +17,8 @@ export default function AddGartenPage () {
   // const [telefon, setTelefon] = useState('');
   // const [email, setEmail] = useState('');
   // const [web, setWeb] = useState('');
-  const [image, setImage] = useState(null);
-  const [avatar, setAvatar] = useState(null);
+  // const [image, setImage] = useState(null);
+  // const [avatar, setAvatar] = useState(null);
   const dispatch = useDispatch();
 
   const clearForm = () => {
@@ -33,8 +32,6 @@ export default function AddGartenPage () {
   }
 
   const handleSubmit = async (e) => {
-    
-    console.log('reg');
     const geoArray = geo.trim().split(",");
     const reqBody = {
         name,
@@ -51,17 +48,17 @@ export default function AddGartenPage () {
     e.preventDefault();
   }
 
-  const sendFile = useCallback(async () => {
-    try {
-      const data = new FormData();
-      data.append("avatar", image);
-      dispatch(uploadImage(data)).then((res) => {
-        setAvatar(res?.data?.path);
-      });
-    } catch (error) {
+  // const sendFile = useCallback(async () => {
+  //   try {
+  //     const data = new FormData();
+  //     data.append("avatar", image);
+  //     dispatch(uploadImage(data)).then((res) => {
+  //       setAvatar(res?.data?.path);
+  //     });
+  //   } catch (error) {
       
-    }
-  }, [image, dispatch])
+  //   }
+  // }, [image, dispatch])
   return (
     <MainLayout className="registration">
       <div>Добавление детского садика</div>

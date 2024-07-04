@@ -89,9 +89,8 @@ export const AddOrganisationForm = () => {
   }, []);
 
   const handleSubmit = useCallback((values) => {
-    console.log("Received values of form: ", values);
-    dispath(createOrganisation({ creater_id: authData?.id, ...values }, navigate));
-  }, [dispath, authData?.id, navigate]);
+    dispath(createOrganisation({ creater_id: authData?.id, type: typeOrganisation, ...values }, navigate));
+  }, [dispath, authData?.id, navigate, typeOrganisation]);
   return (
     <Form
       layout={"vertical"}

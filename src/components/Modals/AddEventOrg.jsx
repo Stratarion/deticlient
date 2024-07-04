@@ -31,7 +31,6 @@ export const AddEventOrgModal = ({ open, handleCancel }) => {
   }, [params.id]);
 
   const onFinish = (values) => {
-    console.log("Received values of form: ", values, values.time[0].format("HH:mm"));
     const newEvent = {
       lesson: values.lesson,
       worker: values.worker,

@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { ListItem } from "./ListItem";
-import { LikeOutlined, MessageOutlined, StarOutlined } from '@ant-design/icons';
+import { LikeOutlined, MessageOutlined } from '@ant-design/icons';
 import { Divider, List as AntList, Space } from 'antd';
 import { Stars } from 'components/Stars';
 export {
@@ -29,21 +29,20 @@ const ShortInfo = (info) => {
   )
 } 
 
-export const List = ({ data, handleTitleClick }) => {
+export const List = ({ data, handleTitleClick, page, setPage }) => {
   return (
     <ListStyled
       itemLayout="vertical"
       size="large"
       pagination={{
-        onChange: (page) => {
-          console.log(page);
-        },
         pageSize: 10,
+        current: page,
+        onChange: setPage,
       }}
       dataSource={data}
       footer={
         <div>
-          <b>ant design</b> footer part
+          <b>Футер</b> Хорошее рекламное место
         </div>
       }
       renderItem={(item) => (

@@ -1,3 +1,5 @@
+import { uploadImage } from "api";
+
 export const fileReaderHealper = (e, cb) => {
   const target = e.target;
 
@@ -15,6 +17,8 @@ export const fileReaderHealper = (e, cb) => {
   fileReader.onload = function() {
       cb(fileReader.result);
   }
-
+  const formData = new FormData();
+  formData.append("avatar", e)
+  uploadImage(formData)
   fileReader.readAsDataURL(target.files[0]);
 }

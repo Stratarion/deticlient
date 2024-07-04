@@ -29,7 +29,6 @@ const Header = ({
 	isMainPage,
 }) => {
   const { authData } =  useSelector(state => state.auth);
-  console.log(authData);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const logout = () => {

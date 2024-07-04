@@ -1,7 +1,7 @@
 // main sources
 import React, { useMemo, useCallback, useEffect, useRef, useState } from 'react';
 import { useLocation, useNavigate } from "react-router-dom";
-import { YMaps } from '@pbe/react-yandex-maps';
+import { useYMaps } from '@pbe/react-yandex-maps';
 
 // comsponents
 import KinderGartenHeader from 'components/Kindergarten/KindergartenHeader';
@@ -40,6 +40,7 @@ const LOW_HAIGHT_MAP = "20vh";
 
 function Kindergarten() {
   const query = useQuery();
+  const ymaps = useYMaps(['Map', 'geocode']);
 
   const { position: userPosition } = usePosition(COORD_CENTER);
 
@@ -73,7 +74,6 @@ function Kindergarten() {
     })();
   }, [value]);
 
-
   useEffect(() => {
     if (!isLoading) {
       return;
@@ -93,7 +93,7 @@ function Kindergarten() {
   // GETTERS
   const getCurrentPlaceInfo = useCallback(() => {
     return gartensList.find((item) => item.id === currentPlace);
-  }, [currentPlace, gartensList])
+  }, [currentPlace, gartensList]);
 
   // HANDLERS
   const handleMarkClick = useCallback((garten) => {
@@ -116,18 +116,13 @@ function Kindergarten() {
 
   const coordForMap = useMemo(() => {
     return getCurrentPlaceInfo()
-    ? [getCurrentPlaceInfo()?.geo1, getCurrentPlaceInfo()?.geo2]
+    ? getCurrentPlaceInfo()?.geo
     : userPosition
 
   }, [getCurrentPlaceInfo, userPosition])
   
   return (
     <MainLayout>
-      <YMaps
-        query={{
-          apikey: YA_KEY_API
-        }}
-      >
         <div className='kindergarten'>
           {
             currentPlace ?
@@ -159,8 +154,9 @@ function Kindergarten() {
             currentPosition={coordForMap}
             markList={gartensList}
             handleMarkClick={handleMarkClick}
-            ref={ref}
+            mapRef={ref}
             mapSize={mapSize}
+            ymaps={ymaps}
           />
 
           {currentPlace ? (
@@ -174,6 +170,7 @@ function Kindergarten() {
             <List
               data={gartensList}
               page={page}
+              setPage={setPage}
               mtop="20px"
               handleTitleClick={handleMarkClick}
             />
@@ -181,7 +178,6 @@ function Kindergarten() {
           
           
         </div>
-      </YMaps>
     </MainLayout>
   )
 };

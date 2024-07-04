@@ -18,7 +18,10 @@ import { authUser } from "actions/auth";
 import { AddOrganisationPage } from "pages/AddOrganisation";
 import { ShedulleListPage } from "pages/ShedulleList";
 import { LessonsListPage } from "pages/LessonsList";
+import { YMaps } from '@pbe/react-yandex-maps';
 import { WorkersListPage } from "pages/WorkersList";
+
+import { YA_KEY_API } from 'constants';
 
 import moment from 'moment';
 // Set moment to FR
@@ -103,7 +106,13 @@ function App() {
   }, [dispatch])
   return (
     <div className="container">
-      <RouterProvider router={router} />
+      <YMaps
+        query={{
+          apikey: YA_KEY_API
+        }}
+      >
+        <RouterProvider router={router} />
+      </YMaps>
     </div>
   );
 }

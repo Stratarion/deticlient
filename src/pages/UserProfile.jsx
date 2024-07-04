@@ -1,19 +1,42 @@
 import React, { useCallback, useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { Grid } from "uikit";
-import { GridItem } from "uikit";
 import styled from "styled-components";
-import { fileReaderHealper } from "utils/fileReader";
-import { FlexBox, Image } from "uikit";
-import settings from "images/settings.svg";
 import { Input } from "uikit";
 import { MainLayout } from "layouts";
 import { OrganisationProfile } from "components/OrganisationProfile";
 import { MyOrgList } from "components/OrganisationProfile/MyOrgList";
-
+import { uploadImage, updateUser } from "api";
+import { EditOutlined } from "@ant-design/icons";
+import { Upload, Button, Image, Row, Col, Spin, Flex, Typography } from "antd";
 
 const ProfileStyled = styled.div`
 `;
+
+const getBase64 = (file) =>
+  new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = (error) => reject(error);
+  });
+
+const { Text, Title } = Typography;
+
+const StyledRow = styled(Row)({
+  display: "flex",
+  padding: "10px 0"
+});
+
+const StyledEdit = styled(EditOutlined)({
+  position: "absolute",
+  top: "10px",
+  right: "15px"
+});
+
+const StyledImage = styled(Image)({
+  maxHeight: "300px"
+});
+
 const UserProfilePage = () => {
   const { authData } =  useSelector(state => state.auth);
   const [userAvatar, setUserAvatar] = useState(null);
@@ -27,66 +50,107 @@ const UserProfilePage = () => {
 
   useEffect(() => {
     if (authData) {
-      console.log(authData, email);
       setName(authData.name);
       setEmail(authData.email);
     }
   }, [authData, email])
 
+  const sendFile = async () => {
+    const avatrInfo = await uploadImage(userAvatar);
+    updateUser({
+      id: authData.id,
+      avatar_url: avatrInfo.data.Location,
+    });
+  }
 
+  const handleChangeAvatar = async (info) => {
+    console.log(info)
+    const lastIndex = info.fileList.length - 1
+    if (!info.fileList[lastIndex].url && !info.fileList[lastIndex].preview) {
+      info.fileList[lastIndex].preview = await getBase64(info.fileList[lastIndex].originFileObj);
+    }
+    setUserAvatar(info.fileList[lastIndex])
+  }
+  console.log(userAvatar)
   return (
     <MainLayout>
       <ProfileStyled>
-        {authData ? <Grid rows="repeat(6, 1fr)">
-          <GridItem columns="1/3" rows="1/7">
-            <FlexBox direction="column">
-              <Image src={userAvatar} height="100%" />
-              {settingsMod && <input type="file" onChange={(e) => fileReaderHealper(e, setUserAvatar)} />}
-
-            </FlexBox>
-          </GridItem>
-          <GridItem columns="3/5">
-            <h5>Имя пользователя</h5>
-            {
-              settingsMod
-                ? <Input type="text" value={name} onChange={(e) => setName(e.target.value)} />
-                : <p>{authData.name}</p>
-            }
-            
-            {settingsMod}
-          </GridItem>
-          <GridItem columns="5/7">
-            <h5>Почта</h5>
-            <p>{authData.email}</p>
-          </GridItem>
-          <GridItem columns="12/13">
-            <FlexBox justify="flex-end">
-              <Image onClick={handleClickSettings} src={settings} width="20px" height="auto" />
-            </FlexBox>
-          </GridItem>
+        {authData ? <>
+          <StyledRow gutter={[16, 16]}>
+            <Col span={6}>
+              <StyledRow>
+                <Col span={24}>
+                  <StyledImage src={ userAvatar?.url || userAvatar?.preview || authData.avatar_url} />
+                </Col>
+              </StyledRow>
+              <StyledRow>
+                
+              <Col span={24}>
+                <Flex gap={10} >
+                  <Upload
+                    onChange={(info) => {
+                      handleChangeAvatar(info)
+                    }}
+                    showUploadList={false}
+                    beforeUpload={(file) => {
+                      return new Promise ((resolve, reject) => {
+                        if (file.size > 20) {
+                          reject("to fat")
+                        } else {
+                          resolve("Success")
+                        }
+                      })
+                    }}
+                  >
+                    <Button>Загрузить</Button>
+                  </Upload>
+                  <Button onClick={sendFile}>Сохранить</Button>
+                </Flex>
+                </Col>
+              </StyledRow>
+              
+            </Col>
+            <Col span={18}>
+              <StyledRow gutter={[16, 16]}>
+                <Col span={12}>
+                  <Title level={4}>Имя пользователя</Title>
+                  {
+                    settingsMod
+                      ? <Input type="text" value={name} onChange={(e) => setName(e.target.value)} />
+                      : <Text>{authData.name}</Text>
+                  }
+                  {settingsMod}
+                </Col>
+                <Col span={12}>
+                
+                  <Title level={4}>Почта</Title>
+                  <Text>{authData.email}</Text>
+                </Col>
+                <StyledEdit onClick={handleClickSettings} />
+                <Col span={24}>
+                  <Title level={4}>Адрес</Title>
+                  <Text>{authData.address}</Text>
+                </Col>
+                <Col span={24}>
+                  <Title level={4}>Телефон</Title>
+                  <Text>{authData.phone || "Не указан"}</Text>
+                </Col>
+              </StyledRow>
+            </Col>
+          </StyledRow>
           { authData.isOrganisation &&
-            <GridItem columns="1/13">
+            <Row gutter={[16, 16]}>
               <OrganisationProfile />
-            </GridItem>
+            </Row>
           }
           { authData.isOrganisation &&
-            <GridItem columns="1/13">
-              <MyOrgList />
-            </GridItem>
+            <Row gutter={[16, 16]}>
+              <Col span={24}>
+                <MyOrgList />
+              </Col>
+            </Row>
           }
-          <GridItem></GridItem>
-          <GridItem></GridItem>
-          <GridItem></GridItem>
-          <GridItem></GridItem>
-          <GridItem></GridItem>
-          <GridItem></GridItem>
-          <GridItem></GridItem>
-          <GridItem></GridItem>
-          <GridItem></GridItem>
-          <GridItem></GridItem>
-          <GridItem></GridItem>
-        </Grid> : <div>Загрузка</div>}
-
+        </> : <Spin />}
       </ProfileStyled>
     </MainLayout>
   );

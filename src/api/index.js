@@ -41,8 +41,9 @@ export const signUp = (formData) => API.post('/user/signup', formData);
 export const getUsersList = (page) => API.get(`/user/getUserList?page=${page}`);
 
 export const authUser = () => API.get('/user/auth', { headers: { Authorization: `Bearer ${JSON.parse(localStorage.getItem('token'))}` }});
+export const updateUser = (body) => API.post('/user/update', body);
 
-export const uploadImage = (data) => API.post('/upload/singleImage', data, {
+export const uploadImage = (data) => API.post('/upload/image', data, {
   headers: {
     'Content-Type': 'multipart/form-data'
   }

@@ -16,10 +16,10 @@ export const MyOrgList = () => {
   return (
     <div>
       <List
-        pagination={{ position: "bottom", align: "center" }}
+        pagination={{ position: "bottom", align: "center", current: page, onChange: setPage }}
         dataSource={organisations}
         renderItem={(item, index) => (
-          <List.Item>
+          <List.Item key={index}>
             <List.Item.Meta
               avatar={<Avatar src={`https://api.dicebear.com/7.x/miniavs/svg?seed=${index}`} />}
               title={<Link to={`/profile/organisation/${item.id}/lessons`}>{item.name}</Link>}
