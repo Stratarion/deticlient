@@ -7,18 +7,11 @@ import { OrganisationProfile } from "components/OrganisationProfile";
 import { MyOrgList } from "components/OrganisationProfile/MyOrgList";
 import { uploadImage, updateUser } from "api";
 import { EditOutlined } from "@ant-design/icons";
+import { getBase64 } from "utils/base64";
 import { Upload, Button, Image, Row, Col, Spin, Flex, Typography } from "antd";
 
 const ProfileStyled = styled.div`
 `;
-
-const getBase64 = (file) =>
-  new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result);
-    reader.onerror = (error) => reject(error);
-  });
 
 const { Text, Title } = Typography;
 
@@ -84,31 +77,29 @@ const UserProfilePage = () => {
                 </Col>
               </StyledRow>
               <StyledRow>
-                
-              <Col span={24}>
-                <Flex gap={10} >
-                  <Upload
-                    onChange={(info) => {
-                      handleChangeAvatar(info)
-                    }}
-                    showUploadList={false}
-                    beforeUpload={(file) => {
-                      return new Promise ((resolve, reject) => {
-                        if (file.size > 20) {
-                          reject("to fat")
-                        } else {
-                          resolve("Success")
-                        }
-                      })
-                    }}
-                  >
-                    <Button>Загрузить</Button>
-                  </Upload>
-                  <Button onClick={sendFile}>Сохранить</Button>
-                </Flex>
+                <Col span={24}>
+                  <Flex gap={10} >
+                    <Upload
+                      onChange={(info) => {
+                        handleChangeAvatar(info)
+                      }}
+                      showUploadList={false}
+                      beforeUpload={(file) => {
+                        return new Promise ((resolve, reject) => {
+                          if (file.size > 20) {
+                            reject("to fat")
+                          } else {
+                            resolve("Success")
+                          }
+                        })
+                      }}
+                    >
+                      <Button>Загрузить</Button>
+                    </Upload>
+                    <Button onClick={sendFile}>Сохранить</Button>
+                  </Flex>
                 </Col>
               </StyledRow>
-              
             </Col>
             <Col span={18}>
               <StyledRow gutter={[16, 16]}>

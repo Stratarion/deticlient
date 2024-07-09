@@ -29,9 +29,13 @@ const OrganisationProfilePage = () => {
                 theme="light"
                 style={{ height: "100%" }}
                 mode="inline" 
-                defaultSelectedKeys={['workers']}
+                defaultSelectedKeys={['info']}
                 onClick={handleMenuItemClick}
                 items={[
+                  {
+                    key: 'info',
+                    label: 'Профиль'
+                  },
                   {
                     key: 'workers',
                     label: 'Сотрудники',

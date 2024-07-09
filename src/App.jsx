@@ -20,6 +20,7 @@ import { ShedulleListPage } from "pages/ShedulleList";
 import { LessonsListPage } from "pages/LessonsList";
 import { YMaps } from '@pbe/react-yandex-maps';
 import { WorkersListPage } from "pages/WorkersList";
+import { OrganisationInfoPage } from "pages/OrganisationInfo";
 
 import { YA_KEY_API } from 'constants';
 
@@ -88,6 +89,10 @@ const router = createBrowserRouter([
       {
         path: "workers",
         Component: WorkersListPage,
+      },
+      {
+        path: "info",
+        Component: OrganisationInfoPage,
       }
     ]
   },

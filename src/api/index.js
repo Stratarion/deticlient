@@ -42,6 +42,7 @@ export const getUsersList = (page) => API.get(`/user/getUserList?page=${page}`);
 
 export const authUser = () => API.get('/user/auth', { headers: { Authorization: `Bearer ${JSON.parse(localStorage.getItem('token'))}` }});
 export const updateUser = (body) => API.post('/user/update', body);
+export const updateOrganisation = (body) => API.post('/organisations/update', body);
 
 export const uploadImage = (data) => API.post('/upload/image', data, {
   headers: {

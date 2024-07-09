@@ -21,8 +21,8 @@ export const MyOrgList = () => {
         renderItem={(item, index) => (
           <List.Item key={index}>
             <List.Item.Meta
-              avatar={<Avatar src={`https://api.dicebear.com/7.x/miniavs/svg?seed=${index}`} />}
-              title={<Link to={`/profile/organisation/${item.id}/lessons`}>{item.name}</Link>}
+              avatar={<Avatar src={item.avatar_url} />}
+              title={<Link to={`/profile/organisation/${item.id}/info`}>{item.name}</Link>}
               description={item.description}
             />
           </List.Item>
