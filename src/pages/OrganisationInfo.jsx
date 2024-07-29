@@ -4,8 +4,24 @@ import { Row, Col, Typography, Flex, Upload, Button, Image } from 'antd';
 import { getBase64 } from "utils/base64";
 import styled from "styled-components";
 import { updateOrganisation, uploadImage } from "api";
+import ImageGallery from "react-image-gallery";
 
 const { Text, Title } = Typography;
+
+const images = [
+  {
+    original: "https://appvolkov.storage.yandexcloud.net/images/5b492597-0c79-42da-855c-9f8f3f07eaaf.png",
+    thumbnail: "https://appvolkov.storage.yandexcloud.net/images/5b492597-0c79-42da-855c-9f8f3f07eaaf.png",
+  },
+  {
+    original: "https://appvolkov.storage.yandexcloud.net/images/5b492597-0c79-42da-855c-9f8f3f07eaaf.png",
+    thumbnail: "https://appvolkov.storage.yandexcloud.net/images/5b492597-0c79-42da-855c-9f8f3f07eaaf.png",
+  },
+  {
+    original: "https://appvolkov.storage.yandexcloud.net/images/5b492597-0c79-42da-855c-9f8f3f07eaaf.png",
+    thumbnail: "https://appvolkov.storage.yandexcloud.net/images/5b492597-0c79-42da-855c-9f8f3f07eaaf.png",
+  },
+];
 
 const StyledImage = styled(Image)({
   maxHeight: "300px"
@@ -70,6 +86,9 @@ export const OrganisationInfoPage = () => {
         <Col span={24}>
           <Title level={4}>Почта</Title>
           <Text>{currentOrganisation?.email}</Text>
+        </Col>
+        <Col>
+          <ImageGallery items={images} />;
         </Col>
         <Col span={24}>
           <Title level={4}>Описание</Title>
