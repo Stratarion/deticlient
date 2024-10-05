@@ -12,7 +12,7 @@ API.interceptors.request.use((req) => {
     return req;
 });
  
-export const fetchGartens = (page) => API.get(`/gartens?page=${page}`);
+export const fetchGartens = (page, body) => API.post(`/gartens?page=${page}`, body); // filters
 export const createGarten = (newGarten) => API.post('/gartens/create_garten', newGarten);
 export const destroyGartens = () => API.get('/gartens/destroy_gartens');
 

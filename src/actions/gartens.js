@@ -14,10 +14,10 @@ export const createGarten = (body) => async (dispatch) => {
   }
 }
 
-export const getGartenList = (page) => async (dispatch) => {
+export const getGartenList = (page, filters) => async (dispatch) => {
   try {
     dispatch({ type: START_LOADING });
-    const { data: { data, currentPage, numberOfPages } } = await api.fetchGartens(page);
+    const { data: { data, currentPage, numberOfPages } } = await api.fetchGartens(page, { filters: filters });
 
     dispatch({ type: FETCH_ALL, payload: { data, currentPage, numberOfPages } });
     dispatch({ type: END_LOADING });

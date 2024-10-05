@@ -1,6 +1,6 @@
 // main sources
 import React, { useMemo, useCallback, useEffect, useRef, useState } from 'react';
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useYMaps } from '@pbe/react-yandex-maps';
 
 // comsponents
@@ -11,7 +11,7 @@ import { Grid } from 'uikit';
 // additional sources 
 import { GartenInfo } from 'components/Kindergarten/GartenInfo';
 import { useSelector, useDispatch } from 'react-redux';
-import { getGartenList, destroyGartens } from 'actions/gartens';
+import { getGartenList } from 'actions/gartens';
 import { usePosition } from 'hooks/usePosition';
 import { GridItem, Button, List } from 'uikit';
 import { MainLayout } from 'layouts';
@@ -53,8 +53,6 @@ function Kindergarten() {
 
   const { isLoading, gartens: gartensList } = useSelector((state) => state.gartens);
 
-  const navigate = useNavigate();
-
   const dispatch = useDispatch();
   const ref = useRef();
 
@@ -90,6 +88,15 @@ function Kindergarten() {
     setFilterMax((value));
   }, []);
 
+  const applyFilters = useCallback((value) => {
+    setPage(1);
+    dispatch(getGartenList(1, {
+      type: filterType,
+      max: filterMax,
+      name: value,
+    }));
+  }, [dispatch, filterMax, filterType]);
+
   // GETTERS
   const getCurrentPlaceInfo = useCallback(() => {
     return gartensList.find((item) => item.id === currentPlace);
@@ -100,19 +107,11 @@ function Kindergarten() {
     setCurrentPlace(garten.id);
     setMapSize(LOW_HAIGHT_MAP);
   }, []);
-
-  const handleDestroyGartens = useCallback(() => {
-    dispatch(destroyGartens())
-  }, [dispatch]);
   
   const handleBackButton = useCallback(() => {
     setCurrentPlace(null);
     setMapSize(DEFAULT_MAP_SIZE);
   }, []);
-
-  const handleAddButton = useCallback(() => {
-    navigate("/kindergarten/create")
-  }, [navigate])
 
   const coordForMap = useMemo(() => {
     return getCurrentPlaceInfo()
@@ -129,22 +128,17 @@ function Kindergarten() {
               <h2>{getCurrentPlaceInfo().name}</h2>
               :
               <Grid row="1fr 2fr">
-                <GridItem columns="1/3" >
-                  <Button onClick={handleAddButton}>Добавить заведение</Button>
-                </GridItem>
-                <GridItem columns="3/5">
-                  <Button onClick={handleDestroyGartens}>Удалить все</Button>
-                </GridItem>
                 <GridItem columns="1/13" rows="2/3">
                   <KinderGartenHeader
                     filterType={filterType}
                     filterMax={filterMax}
                     value={value}
-                    changeValue={setValue}
+                    changeValue={setValue} // фильтр по названию
                     changeTypeFilter={changeTypeFilter}
                     changeMaxFilter={changeMaxFilter}
                     typeOptions={typeOptions}
                     maxOptions={maxOptions}
+                    applyFilters={applyFilters}
                   />
                 </GridItem>
               </Grid>

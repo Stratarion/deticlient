@@ -1,7 +1,12 @@
-import React from "react";
-import { GridItem } from "uikit";
-import { Grid } from "uikit";
-import { InputWithLabel, Select } from "uikit";
+import React, { useCallback } from "react";
+import styled from "styled-components";
+import { GridItem, Grid, InputWithLabel, Select, Button } from "uikit";
+
+const StyledButtonLayout = styled.div`
+  display: flex;
+  align-items: center;
+  height: 100%;
+`
 
 const KinderGartenHeader = ({
   filterType,
@@ -12,7 +17,12 @@ const KinderGartenHeader = ({
   changeValue,
   typeOptions,
   maxOptions,
+  applyFilters,
 }) => {
+
+  const handleApplyFilters = useCallback(() => {
+    applyFilters();
+  }, [applyFilters]);
   return (
     <div className="kindergarten-header">
       <Grid rows="1fr 2fr" gap="10px 20px">
@@ -45,7 +55,11 @@ const KinderGartenHeader = ({
             onInput={(e) => changeValue(e.target.value)}
           />
         </GridItem>
-
+        <GridItem>
+          <StyledButtonLayout>
+            <Button onClick={handleApplyFilters}>Применить</Button>
+          </StyledButtonLayout>
+        </GridItem>
       </Grid>
       <div className="kindergatern-tags">
         <div className="kindergatern-tags-item"></div>
